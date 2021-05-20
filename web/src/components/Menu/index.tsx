@@ -27,7 +27,7 @@ export default function Menu(){
                        <Link to="/">Pedidos</Link>
                    </li>
                    <li>
-                       <Link to="/">
+                       <Link to="/cart">
                         <BiCart
                         color= 'var(--white)'
                         size = {18}

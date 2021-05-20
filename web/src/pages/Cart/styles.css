@@ -1,0 +1,114 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.title h1{
+    color: var(--gray-dark);
+
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.containerCart{
+    width: 70%;
+}
+
+.product{
+    display: flex;
+    flex-direction: row;
+
+    border: solid 2px var(--gray-dark);
+    border-radius: 2px;
+
+    margin-top: 2rem;
+
+}
+
+.product > div:first-child{
+    width: 30%;
+    height: 14rem;
+    background: var(--gray-dark);
+}
+
+.product > div:last-child{
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.875rem 2rem;
+    width: inherit;
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name h1 {
+    color: var(--gray-dark);
+    font-size: 1.5rem;
+
+    margin-bottom: 0.5rem;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top: solid 1px var(--gray-dark);
+}
+
+.option > span{
+    padding: 0.5rem 0;
+
+    font-size: 0.95rem;
+
+    margin: 0;
+}
+
+.option > span strong{
+    margin-left: 2rem;
+}
+
+.option button{
+    background: var(--gray-dark);
+    color: var(--white);
+
+    width: 2rem;
+    margin: 0.5rem 0.3rem;
+    height: 1.5rem;
+}
+
+.total{
+    display: flex;
+    justify-content: flex-end;
+
+    
+    border-top: solid 1px var(--gray-dark);
+}
+
+.finish{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    margin-top: 2rem;
+}
+
+.finish button{
+    padding: 1rem 2rem;
+    background: var(--gray-dark);
+    border-radius: 5px;
+
+    color: var(--white);
+    font-weight: bold;
+    text-transform: uppercase;
+}
