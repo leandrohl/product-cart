@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode, useEffect} from 'react'
-import { isTemplateTail } from 'typescript';
+
 
 interface Product{
     id: number;

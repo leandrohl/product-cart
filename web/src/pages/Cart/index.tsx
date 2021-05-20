@@ -4,6 +4,7 @@ import './styles.css'
 import { MdClose } from 'react-icons/md'
 import { useContext } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import { ClientContext } from '../../contexts/ClientContext'
 
 interface Product{
     id: number;
@@ -17,6 +18,7 @@ interface Product{
 export default function Cart(){
 
     const {cart, priceTotal, incrementProduct, decrementProduct, clearCart, deleteProduct} = useContext(CartContext)
+    const {openCheckOut} = useContext(ClientContext)
 
 
     return(
@@ -64,9 +66,13 @@ export default function Cart(){
                         })
                         }
                             <div className="finish">
-                                <button onClick={clearCart}>Limpar carrinho</button>
+                                <button type="button" onClick={clearCart}>Limpar carrinho</button>
                                 <strong>Total: {priceTotal} </strong>
-                                <button>Finalizar Pedido</button>
+                                <button 
+                                type="button"
+                                onClick={openCheckOut}
+                                > Finalizar Pedido
+                                </button>
                             </div>  
                         </div>
                         
