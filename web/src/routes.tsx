@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, BrowserRouter} from 'react-router-dom';
 
 import Products from './pages/Products';
-import Product from './pages/Product';
+import ProductItem from './pages/ProductItem';
 
 const Routes = () => {
 	return (
 		<BrowserRouter>
 			<Route component={Products} path="/" exact/>
-			<Route component={Product} path="/product" exact/>
+			<Route component={ProductItem} path="/product/:id" exact/>
 		</BrowserRouter>
 	);
 }

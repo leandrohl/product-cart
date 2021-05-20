@@ -37,13 +37,12 @@
 }
 
 .productChoose{
-    width: 50%;
     margin: 1rem 0;
 }
 
 .productChoose > div{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     margin: 0.3rem 0;
 }
@@ -52,21 +51,25 @@
     font-weight: bold;
 
     margin-right: 1rem;
+
+    width: 20%;
 }
 
 .productChoose select{
-    width: 30%;
+    width: 20%;
 
     border: solid 1px var(--gray-dark);
 }
 
 .productChoose input{
-    width: 30%;
+    width: 20%;
 
     border: solid 1px var(--gray-dark);
+
+    margin-bottom: 1rem;
 }
 
-.productSpecification > div:last-child{
+.productChoose > div:last-child{
     display: flex;
     justify-content: center;
 }
@@ -75,7 +78,6 @@
     margin-top: 1rem;
     padding: 1rem;
 
-    width: 50%;
 
     background: var(--gray-dark);
     border-radius: 5px;
