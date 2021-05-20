@@ -2,11 +2,13 @@ import {products} from '../../products'
 
 import './styles.css'
 
+import {Link} from 'react-router-dom'
+
 export default function Products(){
 
     
     return(
-        <div className="container">
+        <main className="container">
             <div className="title">
                 <h1>Produtos</h1>
             </div>
@@ -14,21 +16,18 @@ export default function Products(){
                 {
                     products.map((product) => {
                         return(
-                            <div className="product" key={product.id}>
-                                <div></div>
-                                <h2>{product.name}</h2>
-                                <span>R$ {product.price}</span>
-                                <div>
-                                    <button type="button">
-                                        Comprar
-                                    </button>
+                            <Link to={`/product`}>
+                                <div className="product" key={product.id}>
+                                    <div></div>
+                                    <h2>{product.name}</h2>
+                                    <span>R$ {product.price}</span>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })
                 }
             </div>
             
-        </div>
+        </main>
     )
 }

@@ -1,0 +1,87 @@
+
+.containerProduct{
+    display: flex;
+    justify-content: center;
+
+}
+
+.containerProduct > div {
+    width: 40%;
+
+    margin-top: 5rem;
+}
+
+.productImg{
+    width: 100%;
+    height: 20rem;
+
+    background: var(--gray-dark);
+}
+
+.productSpecification{
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    padding-left: 2rem;
+}
+
+.productSpecification h1{
+    margin: 0.875rem 0;
+
+}
+
+.productSpecification > span{
+    opacity: 0.8;
+}
+
+.productChoose{
+    width: 50%;
+    margin: 1rem 0;
+}
+
+.productChoose > div{
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0.3rem 0;
+}
+
+.productChoose span{
+    font-weight: bold;
+
+    margin-right: 1rem;
+}
+
+.productChoose select{
+    width: 30%;
+
+    border: solid 1px var(--gray-dark);
+}
+
+.productChoose input{
+    width: 30%;
+
+    border: solid 1px var(--gray-dark);
+}
+
+.productSpecification > div:last-child{
+    display: flex;
+    justify-content: center;
+}
+
+.productSpecification button{
+    margin-top: 1rem;
+    padding: 1rem;
+
+    width: 50%;
+
+    background: var(--gray-dark);
+    border-radius: 5px;
+
+    color: var(--white);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+

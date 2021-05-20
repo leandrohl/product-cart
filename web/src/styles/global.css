@@ -27,8 +27,9 @@ html, body, #root{
 }
 
 body {
-    background: var(--black);
-    font-family: sans-serif;
+    background: var(--white);
+    font-family: Inter, sans-serif;
+
 }
 
 a {
