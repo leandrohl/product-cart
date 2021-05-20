@@ -16,9 +16,8 @@ interface Product{
 
 export default function Cart(){
 
-    const {cart, incrementProduct, decrementProduct, clearCart, deleteProduct} = useContext(CartContext)
+    const {cart, priceTotal, incrementProduct, decrementProduct, clearCart, deleteProduct} = useContext(CartContext)
 
-    console.log(cart)
 
     return(
         <div className="container">
@@ -32,7 +31,7 @@ export default function Cart(){
                         {
                         cart.map((product:Product) => {
                             return(
-                                <div className="product" key={product.id}>
+                                <div className="productInfo" key={product.id}>
                                     <div></div>
                                     <div>
                                         <div className="name">
@@ -57,7 +56,7 @@ export default function Cart(){
                                             </div>
                                         </div>
                                         <div className="total">
-                                            <span>Total: 99,99</span>
+                                            <span>Sub-total: {(product.price * product.qtde).toFixed(2)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -66,6 +65,7 @@ export default function Cart(){
                         }
                             <div className="finish">
                                 <button onClick={clearCart}>Limpar carrinho</button>
+                                <strong>Total: {priceTotal} </strong>
                                 <button>Finalizar Pedido</button>
                             </div>  
                         </div>

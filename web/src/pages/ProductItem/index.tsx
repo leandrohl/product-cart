@@ -81,7 +81,6 @@ export default function ProductItem(){
             size,
         }
 
-        console.log(item)
         addCart(item)
         history.push("/cart")
     }
@@ -97,9 +96,9 @@ export default function ProductItem(){
                 <span>Marca: {product?.brand}</span>
                 <span>Categoria: {product?.category}</span>
                 <span>Genêro: {product?.gender}</span>
-                <form className="productChoose">
+                <form className="productChoose" onSubmit={handleSubmit}>
                     <div>
-                        <span>Cor:</span>
+                        <label>Cor:</label>
                         <select name="color" required onChange={handleColorChange}>
                             {
                                 product?.color.map((cor, index) => {
@@ -112,7 +111,7 @@ export default function ProductItem(){
                     </div>
 
                     <div>
-                        <span>Tamanho:</span>
+                        <label>Tamanho:</label>
                         <select name="size" required onChange={handleSizeChange}>
                             {
                                 product?.size.map((size, index) => {
@@ -125,8 +124,8 @@ export default function ProductItem(){
                     </div>
                     
                     <div>
-                        <span>Quantidade: </span>
-                        <input type="number" name="amount" required max={product?.amount} onChange={handleAmountChange}></input>
+                        <label>Quantidade: </label>
+                        <input type="number" name="amount"  max={product?.amount} onChange={handleAmountChange} required></input>
                     </div>
 
                     <strong>Total: R$ {product?.price} </strong>
@@ -134,7 +133,6 @@ export default function ProductItem(){
                     <div>
                         <button 
                         type="submit"
-                        onClick={handleSubmit}
                         >
                             Adicionar ao carrinho
                         </button> 

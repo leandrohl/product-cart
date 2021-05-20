@@ -1,4 +1,5 @@
-import { createContext, useState, ReactNode} from 'react'
+import { createContext, useState, ReactNode, useEffect} from 'react'
+import { isTemplateTail } from 'typescript';
 
 interface Product{
     id: number;
@@ -11,6 +12,7 @@ interface Product{
 
 interface CartContextData{
     cart: Product[];
+    priceTotal: number,
     addCart: (product: Product) => void;
     clearCart: () => void;
     incrementProduct: (product: Product) => void;
@@ -25,19 +27,22 @@ interface CartProviderProps {
 export const CartContext = createContext({} as CartContextData)
 
 
-export function CartProvider({ children, ...rest } : CartProviderProps){
+export function CartProvider({ children } : CartProviderProps){
     const [cart, setCart] = useState<Product[]>([])
+    const [priceTotal, setPriceTotal] = useState<number>(0.0)
+
+    
 
     function addCart(product: Product){
         const alreadyExists = cart.filter(item => item.id === product.id);
 
         if (alreadyExists.length > 0){
             setCart(
-                cart.map(item=> {
+                cart.map(item => {
                     if (item.id === product.id){
                         item.qtde += product.qtde;
                     }
-                    return product;
+                    return item;
                 }
             ))
         } else {
@@ -55,7 +60,7 @@ export function CartProvider({ children, ...rest } : CartProviderProps){
                 if (item.id === product.id){
                     item.qtde += 1;
                 }
-                return product;
+                return item;
             }
         ))
     }
@@ -66,7 +71,7 @@ export function CartProvider({ children, ...rest } : CartProviderProps){
                 if (item.id === product.id && item.qtde > 1){
                     item.qtde -= 1;
                 }
-                return product;
+                return item;
             }
         ))
     }
@@ -77,9 +82,18 @@ export function CartProvider({ children, ...rest } : CartProviderProps){
         )
     }
 
+    useEffect(() => {
+        cart.map(item => {
+            setPriceTotal(priceTotal + (item.price * item.qtde))
+            return item
+        })
+    },[cart])
+
+
     return(
         <CartContext.Provider value={{
             cart,
+            priceTotal,
             addCart,
             clearCart,
             incrementProduct,
