@@ -2,14 +2,16 @@ import React from 'react';
 
 import Menu from './components/Menu'
 
-import GlobalStyles from './styles/GlobalStyles'
+import './styles/global.css'
+
+import Routes from './routes';
 
 function App() {
   return (
-    <>
-      <GlobalStyles/>
+    <div>
       <Menu/>
-    </>
+      <Routes/>
+    </div>
   );
 }
 

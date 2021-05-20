@@ -1,0 +1,48 @@
+.containerMenu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 5rem;
+
+    background: var(--gray-dark);
+
+}
+
+.logo{
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    margin-left: 6rem;
+
+    list-style: none;
+    color: var(--white);
+}
+
+.menu{
+    width: 40%;
+}
+
+.menu ul{
+    display: flex;
+    
+}
+
+.menu ul li{
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    margin-left: 2.5rem;
+
+    list-style: none;
+    color: var(--white);
+
+}
+
+.menu ul li:last-child{
+    margin-left: 40%;
+}
+
+
