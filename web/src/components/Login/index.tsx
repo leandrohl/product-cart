@@ -28,7 +28,7 @@ interface Product{
   
 export default function Login() {
 
-    const { checkLogin, closeLogin, openRegister,  addRequestToClient} = useContext(ClientContext)
+    const { checkClient, closeLogin, openRegister,  addRequestToClient} = useContext(ClientContext)
     const {cart, clearCart, priceTotal} = useContext(CartContext)
 
     
@@ -50,19 +50,13 @@ export default function Login() {
     function handleSubmit(event: FormEvent ){
         event.preventDefault();
 
-        if(checkLogin(formData)){
+        if(checkClient(formData)){
             addRequestToClient(formData)
             clearCart()
             closeLogin()
         } else {
             alert('Não há um cadastro com esse email/senha')
         }
-
-        // addClientToList(formData)
-        
-
-        
-
 
         // history.push("/")
     }
@@ -75,7 +69,7 @@ export default function Login() {
                         
                     <div className='formInputs'>
                         <input type="email" name="email"  placeholder="e-mail" onChange={handleInputChange} required />
-                        <input type="text" name="password" placeholder="senha" onChange={handleInputChange} required/>
+                        <input type="password" name="password" placeholder="senha" onChange={handleInputChange} required/>
                     </div>
                     <div className='formButtons'>
                         <button type="submit">

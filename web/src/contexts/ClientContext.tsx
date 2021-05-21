@@ -11,7 +11,7 @@ interface ClientContextData{
     openRegister: () => void;
     closeRegister: () => void;
     addClientToList: (client: Client) => void;
-    checkLogin: (client : Request) => boolean;
+    checkClient: (client : Request) => boolean;
     addRequestToClient: (client: Request) => void;
 }
 
@@ -55,7 +55,7 @@ export function ClientProvider({ children } : ClientProviderProps){
 
     const [listClients, setListClients] = useState<Client[]>([])
    
-    function checkLogin(client : Request){
+    function checkClient(client : Request){
         const data = localStorage.getItem('clients')
         let clients
         let valid = false;
@@ -86,7 +86,7 @@ export function ClientProvider({ children } : ClientProviderProps){
             setListClients(
                 listClients.map(user => {
                     if (user.email === client.email){
-                        user.products = user.products.concat(user.products, client.products)
+                        user.products = client.products
                         user.priceTotal = client.priceTotal
                     }
                     return user;
@@ -129,7 +129,7 @@ export function ClientProvider({ children } : ClientProviderProps){
             closeLogin,
             openRegister,
             closeRegister,
-            checkLogin,
+            checkClient,
             addRequestToClient
         }}>
             { isLogin && <Login/>}

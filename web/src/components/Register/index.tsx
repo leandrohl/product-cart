@@ -28,7 +28,7 @@ interface Client{
 }
 
 export default function Register(){
-    const { addClientToList, closeRegister, openLogin} = useContext(ClientContext)
+    const { addClientToList, closeRegister, openLogin, checkClient} = useContext(ClientContext)
     const {cart, clearCart, priceTotal} = useContext(CartContext)
 
     const [formData, setFormData] = useState<Client>({
@@ -52,7 +52,6 @@ export default function Register(){
 
     function handleSubmit(event: FormEvent ){
         event.preventDefault();
-
         
         addClientToList(formData)
         clearCart()
