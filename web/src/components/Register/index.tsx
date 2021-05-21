@@ -4,24 +4,42 @@ import { ClientContext } from '../../contexts/ClientContext'
 import { MdClose } from 'react-icons/md'
 
 import './styles.css'
+import { CartContext } from '../../contexts/CartContext'
 
-interface DataClient{
+
+interface Product{
+    id: number;
+    name: string;
+    color: string;
+    price: number;
+    qtde: number;
+    size: number;
+}
+
+interface Client{
     name: string;
     cpf: string;
     email: string;
+    address: string;
     cellphone: string;
     password: string;
+    products: Product[];
+    priceTotal: number;
 }
 
 export default function Register(){
-    const { activeRegister, addClientToList, closeCheckOut} = useContext(ClientContext)
+    const { addClientToList, closeRegister, openLogin} = useContext(ClientContext)
+    const {cart, clearCart, priceTotal} = useContext(CartContext)
 
-    const [formData, setFormData] = useState<DataClient>({
+    const [formData, setFormData] = useState<Client>({
 		name: '',
         cpf: '000.000.000-00',
         email: '',
+        address: '',
         cellphone: '(99)99999-9999',
-        password: ''
+        password: '',
+        products: cart,
+        priceTotal: priceTotal
 	})
 
 
@@ -32,19 +50,21 @@ export default function Register(){
 	}
 
 
-    function handleSubmit(event: FormEvent){
+    function handleSubmit(event: FormEvent ){
         event.preventDefault();
 
-        const client = formData
+        
+        addClientToList(formData)
+        clearCart()
 
-        // addClientToList(client)
-        closeCheckOut()
+        closeRegister()
+        // history.push("/")
     }
 
         
 
     return(
-        <div className="overlay">
+        <div className="overlayy">
             <div className="containerCheckout">
             <form className='formRegister' onSubmit={handleSubmit}>
                 <h1>Identificação</h1>
@@ -53,6 +73,7 @@ export default function Register(){
                         <input type="text" name="cpf"  placeholder="*cpf" required  onChange={handleInputChange}></input>
                         <input type="text" name="name"  placeholder="*nome" required  onChange={handleInputChange}></input>
                         <input type="text" name="cellphone"  placeholder="*telefone" required  onChange={handleInputChange}></input>
+                        <input type="text" name="address"  placeholder="*endereço" required  onChange={handleInputChange}></input>
                         <input type="password" name="password"  placeholder="*senha" required onChange={handleInputChange} ></input>
                     </div>
                     <div className='registerButtons'>
@@ -63,7 +84,10 @@ export default function Register(){
                             Cadastrar
                         </button>
                         <span>ou</span>
-                        <button type="button" onClick={activeRegister}>
+                        <button type="button" onClick={() => {
+                            closeRegister()
+                            openLogin()
+                        }}>
                             Quero fazer login
                         </button>
                     </div>
@@ -71,7 +95,7 @@ export default function Register(){
                 <button 
                 type="button"
                 className="close"
-                onClick={closeCheckOut}
+                onClick={closeRegister}
                 >
                     <MdClose
                         color= 'var(--gray-dark)'

@@ -21,7 +21,7 @@ interface Product{
 export default function Cart(){
 
     const {cart, priceTotal, incrementProduct, decrementProduct, clearCart, deleteProduct} = useContext(CartContext)
-    const {openCheckOut} = useContext(ClientContext)
+    const {openLogin} = useContext(ClientContext)
 
     let history = useHistory()
 
@@ -76,7 +76,7 @@ export default function Cart(){
                                 <strong>Total: {priceTotal.toFixed(2)} </strong>
                                 <button 
                                 type="button"
-                                onClick={openCheckOut}
+                                onClick={openLogin}
                                 > Finalizar Pedido
                                 </button>
                             </div>  

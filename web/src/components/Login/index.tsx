@@ -22,12 +22,13 @@ interface Product{
     thumbnail: string;
     qtde: number;
     size: number;
+    
 }
 
   
 export default function Login() {
 
-    const {activeRegister, addClientToList, closeCheckOut} = useContext(ClientContext)
+    const { checkLogin, closeLogin, openRegister,  addRequestToClient} = useContext(ClientContext)
     const {cart, clearCart, priceTotal} = useContext(CartContext)
 
     
@@ -49,11 +50,18 @@ export default function Login() {
     function handleSubmit(event: FormEvent ){
         event.preventDefault();
 
-        
-        addClientToList(formData)
-        clearCart()
+        if(checkLogin(formData)){
+            addRequestToClient(formData)
+            clearCart()
+            closeLogin()
+        } else {
+            alert('Não há um cadastro com esse email/senha')
+        }
 
-        closeCheckOut()
+        // addClientToList(formData)
+        
+
+        
 
 
         // history.push("/")
@@ -74,7 +82,10 @@ export default function Login() {
                             Entrar
                         </button>
                         <span>ou</span>
-                        <button type="button" onClick={activeRegister}>
+                        <button type="button" onClick={() => {
+                            closeLogin()
+                            openRegister()
+                        }}>
                             Quero me cadastrar
                         </button>
                     </div>
@@ -82,7 +93,7 @@ export default function Login() {
                 <button 
                 type="button"
                 className="close"
-                onClick={closeCheckOut}
+                onClick={closeLogin}
                 >
                     <MdClose
                         color= 'var(--gray-dark)'

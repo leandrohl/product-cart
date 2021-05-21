@@ -15,7 +15,11 @@ interface Product{
 }
 
 interface Client{
+    name: string;
+    cpf: string;
     email: string;
+    address: string;
+    cellphone: string;
     password: string;
     products: Product[];
     priceTotal: number;
@@ -31,7 +35,6 @@ export default function Requests(){
     if (data !== null)
         clients = JSON.parse(data)
     
-    console.log(clients)
     return(
         <div className="containerRequests">
             {
@@ -45,8 +48,11 @@ export default function Requests(){
                             </div>
                             <div className="containerClient">
                                 <h2>Cliente</h2>
+                                <strong>Nome : {client.name}</strong>
                                 <strong>E-mail: {client.email}</strong>
-                                <strong>Senha: {client.password}</strong>
+                                <strong>CPF: {client.cpf}</strong>
+                                <strong>Telefone: {client.cellphone}</strong>
+                                <strong>Endereço: {client.address}</strong>
                             </div>
                             <div className="containerItems">
                                 <h2>Produtos</h2>

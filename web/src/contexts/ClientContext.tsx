@@ -1,15 +1,18 @@
 import { createContext, useState, ReactNode, useEffect} from 'react'
 import Login from '../components/Login';
+import Register from '../components/Register';
 
 
 
 interface ClientContextData{
-    isRegisterActive: boolean;
     listClients: Client[];
-    openCheckOut: () => void;
-    closeCheckOut: () => void;
-    activeRegister: () => void;
+    openLogin: () => void;
+    closeLogin: () => void;
+    openRegister: () => void;
+    closeRegister: () => void;
     addClientToList: (client: Client) => void;
+    checkLogin: (client : Request) => boolean;
+    addRequestToClient: (client: Request) => void;
 }
 
 interface ClientProviderProps {
@@ -25,8 +28,19 @@ interface Product{
     size: number;
 }
 
-interface Client{
+interface Request{
     email: string;
+    password: string;
+    products: Product[];
+    priceTotal: number;
+}
+
+interface Client{
+    name: string;
+    cpf: string;
+    email: string;
+    address: string;
+    cellphone: string;
     password: string;
     products: Product[];
     priceTotal: number;
@@ -36,14 +50,52 @@ export const ClientContext = createContext({} as ClientContextData)
 
 
 export function ClientProvider({ children } : ClientProviderProps){
-    const [isCheckOutOpen, setIsCheckOutOpen] = useState(false);
-    const [isRegisterActive, setIsRegisterActive] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+    const [isRegister, setIsRegister] = useState(false);
 
     const [listClients, setListClients] = useState<Client[]>([])
    
+    function checkLogin(client : Request){
+        const data = localStorage.getItem('clients')
+        let clients
+        let valid = false;
 
+        if (data !== null)
+            clients = JSON.parse(data)
 
-    function addClientToList(client: Client){
+        clients.map((user: Client) => {
+            if(user.email === client.email && user.password == client.password){
+                valid = true
+            } 
+            return user
+        })
+
+        if(valid) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    
+
+    function addRequestToClient(client: Request){
+        const alreadyExists = listClients.filter(user => user.email === client.email);
+
+        if (alreadyExists.length > 0){
+            setListClients(
+                listClients.map(user => {
+                    if (user.email === client.email){
+                        user.products = user.products.concat(user.products, client.products)
+                        user.priceTotal = client.priceTotal
+                    }
+                    return user;
+                }
+            ))
+        } 
+    }
+
+    function addClientToList(client:Client){
         setListClients([...listClients, client])
     }
 
@@ -53,29 +105,35 @@ export function ClientProvider({ children } : ClientProviderProps){
     }, [listClients])
 
 
-    function activeRegister(){
-        setIsRegisterActive(!isRegisterActive)
+    function openLogin(){
+        setIsLogin(true);
     }
 
-    function openCheckOut(){
-        setIsCheckOutOpen(true);
+    function closeLogin(){
+        setIsLogin(false)
     }
 
-    function closeCheckOut(){
-        setIsRegisterActive(false)
-        setIsCheckOutOpen(false)
+    function openRegister(){
+        setIsRegister(true);
+    }
+
+    function closeRegister(){
+        setIsRegister(false)
     }
 
     return(
         <ClientContext.Provider value={{
-            isRegisterActive,
             listClients,
-            openCheckOut,
-            closeCheckOut,
-            activeRegister,
-            addClientToList
+            addClientToList,
+            openLogin,
+            closeLogin,
+            openRegister,
+            closeRegister,
+            checkLogin,
+            addRequestToClient
         }}>
-            { isCheckOutOpen && <Login/>}
+            { isLogin && <Login/>}
+            { isRegister && <Register/>}
             {children}
         </ClientContext.Provider>
     );
