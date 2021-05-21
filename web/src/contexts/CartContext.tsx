@@ -1,4 +1,5 @@
-import { createContext, useState, ReactNode} from 'react'
+import { createContext, useState, ReactNode, useEffect} from 'react'
+import ProductItem from '../pages/ProductItem';
 
 
 interface Product{
@@ -32,7 +33,10 @@ export function CartProvider({ children } : CartProviderProps){
     const [cart, setCart] = useState<Product[]>([])
     const [priceTotal, setPriceTotal] = useState<number>(0.0)
 
+    
+
     function addCart(product: Product){
+        
         const alreadyExists = cart.filter(item => item.id === product.id);
 
         if (alreadyExists.length > 0){
@@ -47,7 +51,10 @@ export function CartProvider({ children } : CartProviderProps){
         } else {
             setCart([...cart, product])
         }
+        setPriceTotal(priceTotal + (product.qtde * product.price))
+        
     }
+
 
     function clearCart(){
         setPriceTotal(0.0)
@@ -59,10 +66,12 @@ export function CartProvider({ children } : CartProviderProps){
             cart.map(item => {
                 if (item.id === product.id){
                     item.qtde += 1;
+                    setPriceTotal(priceTotal + product.price)
                 }
                 return item;
             }
         ))
+
     }
 
     function decrementProduct(product: Product){
@@ -70,6 +79,7 @@ export function CartProvider({ children } : CartProviderProps){
             cart.map(item => {
                 if (item.id === product.id && item.qtde > 1){
                     item.qtde -= 1;
+                    setPriceTotal(priceTotal - product.price)
                 }
                 return item;
             }
@@ -80,7 +90,9 @@ export function CartProvider({ children } : CartProviderProps){
         setCart(
             cart.filter(item => item.id !== product.id)
         )
+        setPriceTotal(priceTotal - (product.price * product.qtde))
     }
+
 
 
 

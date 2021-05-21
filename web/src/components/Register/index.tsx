@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import { ClientContext } from '../../contexts/ClientContext'
 
+import { MdClose } from 'react-icons/md'
 
 import './styles.css'
 
@@ -36,13 +37,15 @@ export default function Register(){
 
         const client = formData
 
-        addClientToList(client)
+        // addClientToList(client)
         closeCheckOut()
     }
 
         
 
     return(
+        <div className="overlay">
+            <div className="containerCheckout">
             <form className='formRegister' onSubmit={handleSubmit}>
                 <h1>Identificação</h1>
                     <div className='registerInputs'>
@@ -60,11 +63,24 @@ export default function Register(){
                             Cadastrar
                         </button>
                         <span>ou</span>
-                        <button type="submit" onClick={activeRegister}>
+                        <button type="button" onClick={activeRegister}>
                             Quero fazer login
                         </button>
                     </div>
             </form>
+                <button 
+                type="button"
+                className="close"
+                onClick={closeCheckOut}
+                >
+                    <MdClose
+                        color= 'var(--gray-dark)'
+                        size = {25}
+                    />
+                </button>
+            </div>
+        </div>
+            
         
     )
 }

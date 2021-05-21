@@ -1,10 +1,11 @@
-import { createContext, useState, ReactNode} from 'react'
-import Checkout from '../components/Checkout';
+import { createContext, useState, ReactNode, useEffect} from 'react'
+import Login from '../components/Login';
 
 
 
 interface ClientContextData{
     isRegisterActive: boolean;
+    listClients: Client[];
     openCheckOut: () => void;
     closeCheckOut: () => void;
     activeRegister: () => void;
@@ -15,12 +16,20 @@ interface ClientProviderProps {
     children: ReactNode; //aceita qualquer coisa
 }
 
-interface Client{
+interface Product{
+    id: number;
     name: string;
-    cpf: string;
+    color: string;
+    price: number;
+    qtde: number;
+    size: number;
+}
+
+interface Client{
     email: string;
-    cellphone: string;
     password: string;
+    products: Product[];
+    priceTotal: number;
 }
 
 export const ClientContext = createContext({} as ClientContextData)
@@ -35,15 +44,13 @@ export function ClientProvider({ children } : ClientProviderProps){
 
 
     function addClientToList(client: Client){
-        
-        const alreadyExists = listClients.filter(user => client.cpf === user.cpf);
-
-        if (alreadyExists.length > 0){
-            return;
-        } else {
-            setListClients([...listClients, client])
-        }
+        setListClients([...listClients, client])
     }
+
+    useEffect(() => {
+        console.log(listClients)
+        localStorage.setItem("clients", JSON.stringify(listClients));
+    }, [listClients])
 
 
     function activeRegister(){
@@ -62,13 +69,14 @@ export function ClientProvider({ children } : ClientProviderProps){
     return(
         <ClientContext.Provider value={{
             isRegisterActive,
+            listClients,
             openCheckOut,
             closeCheckOut,
             activeRegister,
             addClientToList
         }}>
+            { isCheckOutOpen && <Login/>}
             {children}
-            { isCheckOutOpen && <Checkout/>}
         </ClientContext.Provider>
     );
 }

@@ -6,11 +6,12 @@ import { ClientProvider } from './contexts/ClientContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ClientProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </ClientProvider>
+    <CartProvider>
+      <ClientProvider>
+          <App />
+      </ClientProvider>
+    </CartProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -5,6 +5,8 @@ import { MdClose } from 'react-icons/md'
 import { useContext } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 import { ClientContext } from '../../contexts/ClientContext'
+import { useHistory } from 'react-router-dom'
+
 
 interface Product{
     id: number;
@@ -21,6 +23,7 @@ export default function Cart(){
     const {cart, priceTotal, incrementProduct, decrementProduct, clearCart, deleteProduct} = useContext(CartContext)
     const {openCheckOut} = useContext(ClientContext)
 
+    let history = useHistory()
 
     return(
         <div className="container">
@@ -69,8 +72,8 @@ export default function Cart(){
                         })
                         }
                             <div className="finish">
-                                <button type="button" onClick={clearCart}>Limpar carrinho</button>
-                                <strong>Total: {priceTotal} </strong>
+                                <button type="button" onClick={() => history.push("/")}>Continuar comprando</button>
+                                <strong>Total: {priceTotal.toFixed(2)} </strong>
                                 <button 
                                 type="button"
                                 onClick={openCheckOut}

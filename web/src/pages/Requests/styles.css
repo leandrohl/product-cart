@@ -1,0 +1,43 @@
+
+.containerRequests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 2rem;
+}
+
+.containerClient {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    width: 80%;
+}
+
+.containerItems{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 80%;
+    margin-top: 2rem;
+}
+
+.containerRequests h2{
+    margin-bottom: 0.5rem;
+
+    border-bottom: solid 2px var(--gray-dark);
+}
+
+.productInfor{
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1rem;
+
+}
+
+.productInfor span{
+    margin: 0;
+}
+
