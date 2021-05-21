@@ -9,10 +9,11 @@
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     grid-template-columns: repeat(3, 1fr); 
-    gap: 2.5rem;
+    gap: 1.5rem;
 
     width: 80%;
     margin-bottom: 3rem;
+
 }
 
 .title h1{
@@ -28,12 +29,18 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    border: solid 1px var(--gray-dark);
 }
 
-.product > div:first-child {
-    height: 15rem;
 
-    background-color: var(--gray-dark);
+.productImagem{
+    display: flex;
+    justify-content: center;
+}
+
+.productImagem img{
+    height: 15rem;
 }
 
 .product h2{

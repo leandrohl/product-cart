@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { MdClose } from 'react-icons/md'
 
 import { ClientContext } from '../../contexts/ClientContext'
 
@@ -7,7 +6,7 @@ import './styles.css'
 
 export default function Login() {
 
-    const {closeCheckOut, isRegisterActive, activeRegister} = useContext(ClientContext)
+    const {activeRegister} = useContext(ClientContext)
 
     return(
         <form className='formLogin'>

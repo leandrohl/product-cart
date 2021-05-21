@@ -77,6 +77,7 @@ export default function ProductItem(){
             name: product?.name,
             color,
             price: product?.price,
+            thumbnail: product?.thumbnail,
             qtde,
             size,
         }
@@ -89,7 +90,7 @@ export default function ProductItem(){
     return(
         <div className="containerProduct">
             <div className="productImg">
-                hufdhgu
+                <img src={product?.thumbnail} alt={product?.name}/>
             </div>
             <div className="productSpecification">
                 <h1>{product?.name}</h1>
@@ -125,7 +126,7 @@ export default function ProductItem(){
                     
                     <div>
                         <label>Quantidade: </label>
-                        <input type="number" name="amount"  max={product?.amount} onChange={handleAmountChange} required></input>
+                        <input type="number" name="amount"  max={product?.amount} min={1} onChange={handleAmountChange} required></input>
                     </div>
 
                     <strong>Total: R$ {product?.price} </strong>

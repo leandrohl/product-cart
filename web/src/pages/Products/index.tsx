@@ -18,7 +18,9 @@ export default function Products(){
                         return(
                             <Link to={`/product/${product.id}`}  key={product.id}>
                                 <div className="product">
-                                    <div></div>
+                                    <div className="productImagem">
+                                        <img src={product.thumbnail} alt={product.name}/>
+                                    </div>
                                     <h2>{product.name}</h2>
                                     <span>R$ {product.price}</span>
                                 </div>

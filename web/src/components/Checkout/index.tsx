@@ -10,7 +10,7 @@ import './styles.css'
 
 export default function Checkout() {
 
-    const {closeCheckOut, isRegisterActive, activeRegister} = useContext(ClientContext)
+    const {closeCheckOut, isRegisterActive} = useContext(ClientContext)
 
     return(
         <div className="overlay">

@@ -12,10 +12,12 @@
 }
 
 .productImg{
-    width: 100%;
-    height: 20rem;
+    display: flex;
+    justify-content: center;
+}
 
-    background: var(--gray-dark);
+.productImg img{
+    height: 20rem;
 }
 
 .productSpecification{

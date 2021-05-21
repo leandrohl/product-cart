@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useEffect} from 'react'
+import { createContext, useState, ReactNode} from 'react'
 
 
 interface Product{
@@ -6,6 +6,7 @@ interface Product{
     name: string;
     color: string;
     price: number;
+    thumbnail: string;
     qtde: number;
     size: number;
 }
@@ -31,16 +32,14 @@ export function CartProvider({ children } : CartProviderProps){
     const [cart, setCart] = useState<Product[]>([])
     const [priceTotal, setPriceTotal] = useState<number>(0.0)
 
-    
-
     function addCart(product: Product){
         const alreadyExists = cart.filter(item => item.id === product.id);
 
         if (alreadyExists.length > 0){
             setCart(
                 cart.map(item => {
-                    if (item.id === product.id){
-                        item.qtde += product.qtde;
+                    if (item.id === product.id && item.color === product.color && item.size === product.size){
+                        item.qtde += product.qtde
                     }
                     return item;
                 }
@@ -51,6 +50,7 @@ export function CartProvider({ children } : CartProviderProps){
     }
 
     function clearCart(){
+        setPriceTotal(0.0)
         setCart([])
     }
 
@@ -82,12 +82,6 @@ export function CartProvider({ children } : CartProviderProps){
         )
     }
 
-    useEffect(() => {
-        cart.map(item => {
-            setPriceTotal(priceTotal + (item.price * item.qtde))
-            return item
-        })
-    },[cart])
 
 
     return(

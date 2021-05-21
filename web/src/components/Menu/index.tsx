@@ -24,7 +24,7 @@ export default function Menu(){
                         <Link to="/">Produtos</Link>
                     </li>
                    <li>
-                       <Link to="/">Pedidos</Link>
+                       <Link to="/requests">Pedidos</Link>
                    </li>
                    <li>
                        <Link to="/cart">

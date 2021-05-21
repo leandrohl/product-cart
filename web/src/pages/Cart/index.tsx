@@ -11,6 +11,7 @@ interface Product{
     name: string;
     color: string;
     price: number;
+    thumbnail: string;
     qtde: number;
     size: number;
 }
@@ -34,7 +35,9 @@ export default function Cart(){
                         cart.map((product:Product) => {
                             return(
                                 <div className="productInfo" key={product.id}>
-                                    <div></div>
+                                    <div>
+                                        <img src={product.thumbnail} alt={product.name}></img>
+                                    </div>
                                     <div>
                                         <div className="name">
                                             <h1>{product.name}</h1>
